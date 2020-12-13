@@ -30,30 +30,5 @@ public class articleDAO {
 }
 	
 	
-	public List<Article> getProduitsParMotCle(String mc) { 
-		
-		List<Article> articles= new ArrayList<Article>();
-		mc.toUpperCase();
-		Connection conn=SingletonConnection.getConnection();
-	try {
-	PreparedStatement ps= conn.prepareStatement("select * from artcile where UPPER(code) LIKE ? or UPPER(name) LIKE ?");
-	ps.setString(1, "%"+mc+"%");
-	ps.setString(2, "%"+mc+"%");
-	
-	ResultSet rs = ps.executeQuery(); 
-
-	while (rs.next()) {
-	Article a = new Article(); 
-	a.setCode(rs.getInt("code")); 
-	a.setName(rs.getString("name")); 
-	a.setPrice(rs.getDouble("price"));
-	a.setDescription(rs.getString("description"));
-	a.setQte((int)(rs.getDouble("qte")));
-	articles.add(a);
-	}
-	} catch (SQLException e) { e.printStackTrace();
-	}
-	return articles;
-	}
 
 }
